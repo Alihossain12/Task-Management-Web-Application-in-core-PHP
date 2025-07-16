@@ -12,13 +12,14 @@ if ($filter_cat_id && is_numeric($filter_cat_id)) {
     $stmt = $pdo->prepare("SELECT tasks.*, categories.name as category_name 
         FROM tasks 
         JOIN categories ON tasks.category_id = categories.id 
-        WHERE category_id = ? 
+        WHERE tasks.category_id = ? AND tasks.deleted_at IS NULL
         ORDER BY due_date ASC");
     $stmt->execute([$filter_cat_id]);
 } else {
     $stmt = $pdo->query("SELECT tasks.*, categories.name as category_name 
         FROM tasks 
         JOIN categories ON tasks.category_id = categories.id 
+        WHERE tasks.deleted_at IS NULL
         ORDER BY due_date ASC");
 }
 
@@ -92,9 +93,8 @@ $tasks = $stmt->fetchAll();
                     </td>
                     <td>
                         <a href="view.php?id=<?= $task['id'] ?>" class="btn btn-sm btn-info">👁 View</a>
-                        <a href="add_edit.php?id=<?= $task['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('Are you sure?');" class="btn btn-sm btn-danger">Delete</a>
-                        
+                        <a href="add_edit.php?id=<?= $task['id'] ?>" class="btn btn-sm btn-warning">✏️ Edit</a>
+                        <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('Are you sure?');" class="btn btn-sm btn-danger">🗑 Delete</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
