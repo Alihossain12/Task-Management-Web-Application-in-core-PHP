@@ -44,10 +44,10 @@ $tasks = $stmt->fetchAll();
     <h1>🗂 Task Manager</h1>
 
     <div class="mb-3">
-        <a href="add_edit.php" class="btn btn-success">Add New Task</a>
-        <a href="trash.php" class="btn btn-warning">🗑 Trash</a>
-        <a href="index.php" class="btn btn-info">All Task Manager</a>
-        <a href="Category.php" class="btn btn-secondary">Category</a>
+        <a href="add_edit.php" class="btn btn-success">➕ Add New Task</a>
+        <a href="trash.php" class="btn btn-warning">🗑 View Trash</a>
+        <a href="index.php" class="btn btn-info">📋 All Tasks</a>
+        <a href="Category.php" class="btn btn-secondary">🗂 Categories</a>
     </div>
 
     <form method="GET" class="mb-4">
@@ -68,12 +68,12 @@ $tasks = $stmt->fetchAll();
         <table class="table table-bordered align-middle">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Due Date</th>
-                    <th>Category</th>
-                    <th>Image</th>
-                    <th>Actions</th>
+                    <th>📌 Title</th>
+                    <th>📝 Description</th>
+                    <th>📅 Due Date</th>
+                    <th>📂 Category</th>
+                    <th>🖼 Image</th>
+                    <th>⚙️ Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -91,8 +91,10 @@ $tasks = $stmt->fetchAll();
                         <?php endif; ?>
                     </td>
                     <td>
+                        <a href="view.php?id=<?= $task['id'] ?>" class="btn btn-sm btn-info">👁 View</a>
                         <a href="add_edit.php?id=<?= $task['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                         <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('Are you sure?');" class="btn btn-sm btn-danger">Delete</a>
+                        
                     </td>
                 </tr>
                 <?php endforeach; ?>
